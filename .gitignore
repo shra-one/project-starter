@@ -5,3 +5,7 @@ bower_components
 # Compiled
 dist
 dist/**/*
+
+# others
+package-lock.json
+gulpfile-backup.js
