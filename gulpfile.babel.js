@@ -27,6 +27,7 @@ import nunjucksRender from "gulp-nunjucks-render";
 import { readJson } from "fs-extra";
 import data from "gulp-data";
 import responsive from "gulp-responsive";
+import changed from "gulp-changed";
 import config from './gulp.config';
 
 
@@ -136,57 +137,55 @@ const imageminConfig = [
     })
 ]
 
-const imageResizeConfig = {
-    '*.jpg': [
-        {
-            // image-medium.jpg is 375 pixels wide
-            width: 10,
-            blur:15,
-            rename: {
-                suffix: '-tiny',
-                
-            },
-        }, 
-        {
-            // image-medium.jpg is 375 pixels wide
-            width: 375,
-            rename: {
-                suffix: '-medium',
-                
-            },
-        }, 
-        {
-            // image-large.jpg is 480 pixels wide
-            width: 480,
-            rename: {
-                suffix: '-large',
-                
-            },
-        },
-        {
-            // image-extralarge.jpg is 768 pixels wide
-            width: 768,
-            rename: {
-                suffix: '-extralarge',
-                
-            },
-        
-        },
-        {
-            // image-extralarge.jpg is 768 pixels wide
-            width: 'auto',
-         
-        }
-    ]
-}
+const imageResizeConfig =  {
+    // Resize all JPG images to three different sizes: 200, 500, and 630 pixels
+    '*.jpg': [{
+      width: 50,
+      blur:20,
+      rename: { suffix: '-200px' },
+    }, {
+      
+    }],
+    // Resize all PNG images to be retina ready
+    '*.png': [{
+        width: 50,
+        blur:20,
+        rename: { suffix: '-200px' },
+    }, {
+      
+    }],
+    '*.svg':[{}]
+  };
 
-export const images = () => {
-    return src(config.src.imgwatch)
+export const imagesCopy = () => {
+    return src([config.src.imgwatch, `!${config.src.img}responsive/**/*`])
         .pipe(newer(config.dist.img))
         .pipe(gulpIf(PRODUCTION, imagemin(imageminConfig)))
         .pipe(dest(config.dist.img))
 }
 
+export const imageResponsive = (done)=>{
+    return src(config.src.img+'responsive/**/*.{png,jpg}')
+    .pipe(changed(config.src.img +'cached/'))
+    .pipe(dest(config.src.img +'cached/'))
+    .pipe(responsive( imageResizeConfig, {
+		// Global configuration for all images
+		// The output quality for JPEG, WebP and TIFF output formats
+		quality: 70,
+		// Use progressive (interlace) scan for JPEG and PNG output
+		progressive: true,
+		// Strip all metadata
+		withMetadata: false,
+		withoutEnlargement:true,
+		errorOnUnusedConfig: false,
+		errorOnEnlargement:false,
+		errorOnUnusedImage:false
+      }))
+      .pipe(dest(config.dist.img +'responsive/'))
+      done();
+}
+
+export const images = series(imagesCopy, imageResponsive)
 
 
 
