@@ -29,6 +29,10 @@ module.exports = {
         html:baseUrl
 
     },
+    temp:{
+        img:'temp/images/',
+        js:'temp/js/'
+    },
     node: {
         root: 'node_modules/',
         css: [

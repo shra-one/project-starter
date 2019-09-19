@@ -83,8 +83,8 @@ export const script = () => {
         .pipe(plumber({ errorHandler: notify.onError("Error: <%= error.message %>") }))
 
         .pipe(gulpIf(!PRODUCTION, sourcMap.init()))
-        .pipe(babel())
         .pipe(concat('app.js'))
+        .pipe(babel())
         .pipe(size({ showFiles: true }))
         .pipe(gulpIf(!PRODUCTION, sourcMap.write()))
         .pipe(gulpIf(PRODUCTION, uglify()))
@@ -142,7 +142,7 @@ const imageResizeConfig =  {
     '*.jpg': [{
       width: 50,
       blur:20,
-      rename: { suffix: '-200px' },
+      rename: { suffix: '-50' },
     }, {
       
     }],
@@ -150,7 +150,7 @@ const imageResizeConfig =  {
     '*.png': [{
         width: 50,
         blur:20,
-        rename: { suffix: '-200px' },
+        rename: { suffix: '-50' },
     }, {
       
     }],
@@ -166,8 +166,8 @@ export const imagesCopy = () => {
 
 export const imageResponsive = (done)=>{
     return src(config.src.img+'responsive/**/*.{png,jpg}')
-    .pipe(changed(config.src.img +'cached/'))
-    .pipe(dest(config.src.img +'cached/'))
+    .pipe(changed(config.temp.img +'cached/'))
+    .pipe(dest(config.temp.img +'cached/'))
     .pipe(responsive( imageResizeConfig, {
 		// Global configuration for all images
 		// The output quality for JPEG, WebP and TIFF output formats
@@ -179,7 +179,8 @@ export const imageResponsive = (done)=>{
 		withoutEnlargement:true,
 		errorOnUnusedConfig: false,
 		errorOnEnlargement:false,
-		errorOnUnusedImage:false
+        errorOnUnusedImage:false,
+        silent:true
       }))
       .pipe(dest(config.dist.img +'responsive/'))
       done();
