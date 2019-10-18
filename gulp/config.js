@@ -42,7 +42,7 @@ export default {
             // './src/scss/app.scss'
         ],
         fonts: [
-            'node_modules/@fortawesome/fontawesome-free-webfonts/webfonts/'
+            // 'node_modules/@fortawesome/fontawesome-free-webfonts/webfonts/'
         ],
 
         js: [
