@@ -1,0 +1,82 @@
+<object data="../images/icons/icon-sprite.svg" type="image/svg+xml"
+         id="alphasvg" width="100%" height="100%" style="visibility:hidden; width:0px; height:0px; overflow:hidden; position:absolute;"></object>
+
+<div class="card mb-3" id="ds-icons">
+    <h4 class="card-header">Icons</h4>
+    <div class="card-body">
+        <p>You don't have to manually create svg sprites for icons. gulp task do it for you. All you have to do is save svg icon file into <b>src/images/icons</b>. Each time you add new svg icon file, gulp watches your changes and re-complie task to make all svg icon files into one single svg sprites file named <b>icon-sprite.svg</b>
+        </p>
+        <div class="alert alert-info">
+            Make sure to save your svg icon with semantic or meaningful filename because it will be used as <b>id</b> in svg sprites to call as symbol.
+            </div>
+        <p>Below are all sprite icons shown. You can use it  as svg use method or by calling nunjucks macro which is like calling function</p>
+        <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active"   data-toggle="tab" href="#ds-icons-demo" role="tab" >Demo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"   data-toggle="tab" href="#ds-icons-demo-html" role="tab" >HTML</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"  data-toggle="tab" href="#ds-icons-demo-nunjucks" role="tab" >Nunjucks</a>
+            </li>
+        </ul>
+        <div class="tab-content"  >
+            <div class="tab-pane fade show active" id="ds-icons-demo" role="tabpanel" >
+                <div id="icons" class="icons-sprites"></div>
+            </div>
+            <div class="tab-pane fade" id="ds-icons-demo-html" role="tabpanel" >
+                <div class="code-highlight">
+                 
+                         <pre>
+                             <code>
+        &lt;svg class="icon icon-icon"&gt;  
+                &lt;use  
+                xlink:href="./assets/images/icons/icon-sprite.svg#<strong>NAME</strong>" 
+                href="./assets/images/icons/icon-sprite.svg#<strong>NAME</strong>"&gt;
+                &lt;/use&gt; 
+        &lt;/svg&gt;
+                            </code>
+                         </pre>
+                            
+                </div>
+            </div>
+            <div class="tab-pane fade" id="ds-icons-demo-nunjucks" role="tabpanel" >
+                <div class="code-highlight">
+                  
+<pre>
+    <code>&#123;&#37; svg.icon('<strong>NAME</strong>', '<strong>OPTIONAL CLASS</strong>') &#37;&#125;</code>
+</pre>
+               
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    var a = document.getElementById("alphasvg");
+
+    let svgIcons = document.getElementById('icons');
+
+    // It's important to add an load event listener to the object,
+    // as it will load the svg doc asynchronously
+    a.addEventListener("load", function () {
+
+        // get the inner DOM of alpha.svg
+        var svgDoc = a.contentDocument;
+        // get the inner element by id
+        var icons = svgDoc.querySelectorAll("symbol");
+
+        icons.forEach(icon => {
+            svgIcons.innerHTML += `<figure class="icons-sprites__item">
+                                        <svg class="icon icon-${icon.id}">
+                                            <use xlink:href="./assets/images/icons/icon-sprite.svg#${icon.id}"  href="./assets/images/icons/icon-sprite.svg#${icon.id}"></use>
+                                        </svg>
+                                        <figcaption class="icons-sprites__title">${icon.id}</figcaption>
+                                        </figure>`;
+
+        })
+
+    }, false);
+</script>

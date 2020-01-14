@@ -1,0 +1,30 @@
+.page-header{
+    @include padding(30px);
+
+    &__title {
+        @include font-size(rem(50));
+        margin-bottom: 0;
+        font-weight: lighter;
+        font-family: 'Poppins', sans-serif;
+      
+    }
+}
+
+.list-group-flush .list-group-item {
+    font-family: 'Poppins', sans-serif;
+}
+
+ 
+.grid {
+   
+  
+    display:flex;
+ 
+    &-item {
+        --column:300px;
+       width:var(--column);
+    }
+
+}
+
+ 

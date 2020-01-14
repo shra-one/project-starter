@@ -1,0 +1,79 @@
+/*=============================================
+=            icons            =
+=============================================*/
+
+.icons-sprites {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-rows: 150px;
+  grid-auto-rows: 150px;
+  grid-gap: 10px;
+  align-content: center;
+  justify-content: center;
+
+  svg {
+    font-size: 50px;
+  }
+
+  &__item {
+    border: 1px solid #ccc;
+    text-align: center;
+    display: grid;
+    grid-template-rows: 1fr auto;
+
+    margin: 0px;
+
+    svg {
+      margin: 0 auto;
+      justify-self: center;
+      align-self: center;
+    }
+  }
+
+  &__title {
+    border-top: 1px solid #ccc;
+    padding: 10px;
+  }
+}
+
+.code-highlight {
+  background-color: $gray-100;
+  @include padding(rem(20));
+  pre {
+    margin: 0;
+  }
+}
+
+/*=============================================
+=            color palette generetor            =
+=============================================*/
+.swatchblue {
+  color: $blue-500;
+  color: $blue;
+}
+@each $name, $value in $colors {
+  @for $i from 0 through 9 {
+    @if $i == 0 {
+      .swatch-#{$name}-50 {
+        $swatch-color: tint-color($value, 9);
+      }
+    } 
+    @else {
+      .swatch-#{$name}-#{$i*100} {
+        @if $i < 5 {
+          $swatch-color: tint-color($value, 10-$i * 2);
+          background: $swatch-color;
+          color: color-yiq($swatch-color);
+        } @else if $i > 5 {
+          // background:tint-color($blue, $i*2-10);;
+          $swatch-color: shade-color($value, $i * 2-10);
+          background: $swatch-color;
+          color: color-yiq($swatch-color);
+        } @else {
+          background: $value;
+          color: color-yiq($value);
+        }
+      }
+    }
+  }
+}

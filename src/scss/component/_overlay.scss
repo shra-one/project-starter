@@ -1,0 +1,22 @@
+.overlay {
+    left:0;
+    right:0;
+    top:0;
+    height:100%;
+    width:0;
+    z-index: 500;
+    background-color: rgba(0,0,0, 0.9);
+    transition: opacity 1s;
+
+    &--fixed {
+        position: fixed;
+    }
+    &--absolute {
+        position: absolute;
+    }
+
+    @at-root .offcanvas--isOpen & {
+        width:100%;
+        opacity: 0.8;
+    }
+}

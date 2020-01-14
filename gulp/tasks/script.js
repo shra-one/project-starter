@@ -14,7 +14,7 @@ const PRODUCTION = yargs.argv.prod;
 
 const script = () => {
     const s = size();
-    return src(config.node.js)
+    return src(config.src.jswatch)
         .pipe(plumber({ errorHandler: notify.onError("Error: <%= error.message %>") }))
 
         .pipe(gulpIf(!PRODUCTION, sourcMap.init()))

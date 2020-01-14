@@ -1,0 +1,53 @@
+ // px to rem            =
+ 
+  $baseFontSize : 16px ;
+  
+  @function rem($pixels, $context: $baseFontSize) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+
+  @return $pixels / $context * 1rem;
+}
+
+
+ 
+//  .class{
+//  font-size:rem(16);
+// }
+ 
+
+ // px to em         
+
+@function em($pixels, $context: $baseFontSize) {
+  @if (unitless($pixels)) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if (unitless($context)) {
+    $context: $context * 1px;
+  }
+
+  @return $pixels / $context * 1em;
+}
+
+
+// Request a color level
+@function color-level($color: $primary, $level: 0) {
+  $color-base: if($level > 0, $black, $white);
+  $level: abs($level);
+
+  @return mix($color-base, $color, $level * $theme-color-interval);
+}
+
+@function tint-color($color, $level) {
+  @return mix(white, $color, $level * $theme-color-interval);
+}
+
+@function shade-color($color, $level) {
+  @return mix(black, $color, $level * $theme-color-interval);
+}

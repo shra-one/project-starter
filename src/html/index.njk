@@ -1,13 +1,19 @@
 {% extends "templates/default.njk" %}
+{% set title = "" %}
 {% block header %}
     <h1>heading goes here shrawan shrestha</h1>
-     
- {% for product in products %}
-    <h3>{{product.title}}</h3>
- {%- endfor %}
+{% endblock %}
 
- <script>
- const func=((vars)=>{
- console.log('hello')})
- </script>
+{% block content %}
+<div class="container">
+    {% for product in products %}
+        <h3>{{product.title}}</h3>
+    {%- endfor %}
+    <object data="../images/icons/icon-sprite.svg" type="image/svg+xml"
+         id="alphasvg" width="100%" height="100%"></object>
+
+  
+
+    <h2>body content</h2>
+    </div>
 {% endblock %}

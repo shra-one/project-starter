@@ -1,0 +1,28 @@
+<div class="card mb-3" id="ds-colors">
+    <h4 class="card-header">Colors</h4>
+    <div class="card-body">
+        <div class="row">
+
+            <div class="col-md-5">
+                <div class="swatch">
+                    {% for item in range(1, 10) %}
+                        <div class="p-3 swatch-blue-{{item * 100}}">
+                            <span>$blue-{{item * 100}}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="swatch">
+                    {% for item in range(1, 10) %}
+                        <div class="p-3 swatch-gray-{{item * 100}}">
+                            <span>$gray-{{item * 100}}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

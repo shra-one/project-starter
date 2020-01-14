@@ -49,5 +49,6 @@
         "title": "70s RETRO GLAM KEFIAH",
         "description": "G sfsfl additional purchases",
         "expirestatus":"expired" 
-    }]
+    }],
+    "menus":["colors", " typography", "spacing", "grid", "icons", "images"]
 }

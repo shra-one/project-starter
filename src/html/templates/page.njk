@@ -4,17 +4,30 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0 ">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>{{ projectTitle}}{% if title %}:{{title}}{% endif %}</title>
+        <title>{{ projectTitle}}
+            {% if title %}:{{title}}
+            {% endif %}
+        </title>
         <link rel="stylesheet" href="{{assets_url}}css/app.css">
         <link rel="preload" href="{{assets_url}}images/icons/icon-sprite.svg" as="image" type="image/svg+xml">
         {% block head %}{% endblock %}
     </head>
     <body  >
         {% include "../layout/_offcanvas.njk" %}
-        <div id="app">
+        <div id="app" >
             {% include "../layout/_header.njk" %}
             <div id="content">
-                {% block content %}{% endblock %}
+                <header class="page-header">
+                    <div class="container">
+                        <h1 class="page-header__title">{{title}}</h1> 
+                    </div>
+                </header>
+                <main id="main" class="page-content">
+                    <div class="container">
+                        {% block content %}{% endblock %}
+                    </div>
+                </main>
+
             </div>
             {% include "../layout/_footer.njk" %}
         </div>

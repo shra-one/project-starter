@@ -1,0 +1,61 @@
+.offcanvas {
+  //local variable
+  $p: &;
+  $offCanvasBGColor: $gray-700;
+  $duration: 0.3s;
+  $easing: cubic-bezier(0.32, 1.25, 0.375, 1.15);
+
+  @at-root {
+    //global variable
+    :root {
+      --offCanvasWidth: 250px;
+    }
+    body {
+      transition: right $duration $easing;
+      right: 0;
+    }
+  }
+
+  @include fixed(top 0 left auto right 0 bottom 0);
+  width: var(--offCanvasWidth);
+  background: $offCanvasBGColor;
+  height: 100%;
+  overflow-y: auto;
+  z-index: 501;
+  transform: translateX(100%);
+  transition: transform $duration $easing;
+
+  &--isOpen {
+    right: var(--offCanvasWidth);
+    #{$p} {
+      transform: translateX(0);
+    }
+    .navbar-nav {
+      .nav-item {
+        --delay: 0.2s;
+        opacity: 0;
+        transform: translateX(80px);
+        animation: slide-in 0.4s var(--delay) both;
+      }
+    }
+  }
+
+  #{$p}__navigation {
+    @include padding(30px);
+
+    a {
+      color: color-yiq($offCanvasBGColor);
+    }
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

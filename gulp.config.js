@@ -2,6 +2,7 @@
 const baseUrl="dist/";
 const root="";
 const assets= `${baseUrl}assets/`; 
+export const project='Design System';
 
 export default {
     src: {
@@ -39,6 +40,7 @@ export default {
             './node_modules/bootstrap/scss/',
             // 'node_modules/@fortawesome/fontawesome-free-webfonts/scss/',
             './node_modules/drop-shadow-converter/scss/',
+            './node_modules/rfs/',
             // './src/scss/app.scss'
         ],
         fonts: [

@@ -1,0 +1,17 @@
+%data-background {
+    background-position: center;
+    background-size:cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    z-index: 1;
+    position: relative;
+    &:after {
+        @include absolute(top 0 left 0);
+        // @include size(100%);
+        @include opacity(0.7);
+        content:" ";
+        z-index: -1;
+        background:$body-color;
+
+    }
+}

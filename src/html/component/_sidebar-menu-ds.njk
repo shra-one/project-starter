@@ -1,0 +1,12 @@
+ 
+<div class="card">
+  <div class="list-group list-group-flush">
+  {% for item in menus %}
+      
+    <a href="#ds-{{item | lower | trim }}" class="list-group-item list-group-item-action js-activeClass ">
+      {{item | trim | capitalize   }}
+    </a>
+  {% endfor %}
+   
+  </div>
+</div>

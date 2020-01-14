@@ -1,0 +1,20 @@
+{% extends "templates/ds.njk" %}
+{% set title = "Design System" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-4">
+            {% include "./component/_sidebar-menu-ds.njk" %} 
+        </div>
+        <div class="col-md-8">
+    
+          {% for item in menus %}
+              {% include "./designsystem/_"+item | lower | trim+ ".njk" %}
+            {% endfor %}
+           
+        </div>
+    </div>
+
+{% endblock %}
+  
+{% block foot %}{% endblock %} 
